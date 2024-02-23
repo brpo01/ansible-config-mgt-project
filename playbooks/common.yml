@@ -1,0 +1,13 @@
+---
+- name: update webserver, nfs, lb & db
+  hosts: nfs, webserver, db, lb
+  remote_user: ubuntu
+  become: yes
+  become_user: root
+  tasks:
+  - name: update apt_get repo & cache
+    apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+  - name: ensure wireshark is at its lastest version & install
+    apt:
+      name: wireshark
+      state: latest 
